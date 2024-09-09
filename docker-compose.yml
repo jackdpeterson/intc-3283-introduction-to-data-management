@@ -1,0 +1,16 @@
+name: intc3283
+services:
+  database:
+    container_name: mysql
+    image: mysql:8.0.36
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_USER: nu
+      MYSQL_PASSWORD: nu
+      MYSQL_DATABASE: nu
+    volumes:
+      - mysql-data:/var/lib/mysql
+volumes:
+    mysql-data:

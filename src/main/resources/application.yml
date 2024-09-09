@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    hikari:
+      username: nu
+      password: nu
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://127.0.0.1:3306/nu?useSSL=true&serverTimezone=UTC
+server:
+  error:
+    whitelabel:
+      enabled: false
+    include-exception: true
+    include-stacktrace: always
