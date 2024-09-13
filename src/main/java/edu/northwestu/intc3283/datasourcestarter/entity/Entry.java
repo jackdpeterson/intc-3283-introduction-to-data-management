@@ -5,6 +5,7 @@ import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
 import org.springframework.validation.annotation.Validated;
 import java.time.Instant;
@@ -23,6 +24,11 @@ public class Entry {
     @Email
     @NotEmpty
     private String email;
+
+    @Column("favorite_color")
+    @NotEmpty
+    @Size(min = 3, max = 20)
+    private String favoriteColor;
 
     @CreatedDate
     private Instant createdAt;
@@ -57,5 +63,13 @@ public class Entry {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getFavoriteColor() {
+        return favoriteColor;
+    }
+
+    public void setFavoriteColor(String favoriteColor) {
+        this.favoriteColor = favoriteColor;
     }
 }

@@ -17,6 +17,24 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${entries}">
+                <td><a th:href="@{'/entries/' + ${entry.getId()}}" th:text="${entry.getId()}">ID GOES HERE</a></td>
+                <td th:text="${entry.getName()}">Name GOES HERE</td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+
 </div>
 
 
