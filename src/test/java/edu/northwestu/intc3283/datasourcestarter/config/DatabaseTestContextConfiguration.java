@@ -15,7 +15,7 @@ public class DatabaseTestContextConfiguration implements ApplicationContextIniti
     @Container
     @ServiceConnection
     public static MySQLContainer<?> sqlContainer = new MySQLContainer<>("mysql:8.0")
-            .withReuse(true)
+            .withReuse(false)
             .withUsername("root")
             .withPassword("test")
             .withDatabaseName("testdb") // Add database name if not present
@@ -27,7 +27,7 @@ public class DatabaseTestContextConfiguration implements ApplicationContextIniti
         sqlContainer
                 .withStartupTimeout(Duration.ofMinutes(10))
                 .withNetworkMode("bridge")
-                .withReuse(true)
+                .withReuse(false)
                 .start();
 
         TestPropertyValues.of(
