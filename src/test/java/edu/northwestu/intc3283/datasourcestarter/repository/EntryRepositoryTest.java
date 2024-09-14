@@ -2,6 +2,7 @@ package edu.northwestu.intc3283.datasourcestarter.repository;
 
 import edu.northwestu.intc3283.datasourcestarter.config.DatabaseTestContextConfiguration;
 import edu.northwestu.intc3283.datasourcestarter.config.jdbc.CustomJdbcConfiguration;
+import edu.northwestu.intc3283.datasourcestarter.config.jdbc.converter.ListToMapConverter;
 import edu.northwestu.intc3283.datasourcestarter.entity.Entry;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -12,6 +13,9 @@ import org.springframework.context.annotation.Import;
 import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.List;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -30,6 +34,13 @@ class EntryRepositoryTest {
         Entry e = new Entry();
         e.setEmail("test@example.com");
         e.setName("Test user");
+        e.setCheckbox(true);
+        e.setDate(new Date());
+        e.setDatetime(LocalDateTime.now());
+        e.setSelectedItems(ListToMapConverter.convertListToMap(List.of("1","2","3")));
+        e.setSingleSelect("6");
+
+
         this.entryRepository.save(e);
         assertNotNull(e.getId());
     }
@@ -60,9 +71,7 @@ class EntryRepositoryTest {
         e2.setName("Test user 2");
         e2.setEmail("test1@example.com");
 
-        assertThrows(DbActionExecutionException.class, () -> {
-            this.entryRepository.save(e2);
-        });
+        assertThrows(DbActionExecutionException.class, () -> this.entryRepository.save(e2));
 
     }
 }

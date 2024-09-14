@@ -51,10 +51,69 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="email">Favorite Color</label>
-                    <input type="email" class="form-control" id="favoriteColor" th:field="*{favoriteColor}">
+                    <label for="favoriteColor">Favorite Color</label>
+                    <input type="text" class="form-control" id="favoriteColor" th:field="*{favoriteColor}">
                     <ul class="list-group-flush alert-warning">
                         <li class="list-group-item" th:each="err : ${#fields.errors('favoriteColor')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+
+                <div class="form-group">
+                    <input class="form-check-input" th:field="*{checkbox}" type="checkbox" th:checked="*{checkbox}" id="flexCheckDefault">
+                    <label class="form-check-label" for="flexCheckDefault">
+                        Default checkbox
+                    </label>
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('checkbox')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="date">Favorite Color</label>
+                    <input type="date" class="form-control" id="date" th:field="*{date}">
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('date')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="datetime">Date Time</label>
+                    <input type="datetime-local" class="form-control" id="datetime" name="datetime" th:field="*{datetime}">
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('datetime')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+
+                <div class="form-group">
+                    <label for="singleSelect">Single Select</label>
+                    <select name="singleSelect" id="singleSelect" class="form-control" th:field="*{singleSelect}">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('singleSelect')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="multiSelect">Multiple Checkboxes</label>
+                    <select multiple="multiple" th:field="*{selectedItems}" id="multiSelect">
+                        <option value="1">Option 1</option>
+                        <option value="2">Option 2</option>
+                        <option value="3">Option 3</option>
+                    </select>
+
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('datetime')}"
                             th:text="${err}"></li>
                     </ul>
                 </div>

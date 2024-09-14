@@ -1,37 +1,59 @@
 package edu.northwestu.intc3283.datasourcestarter.entity;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import edu.northwestu.intc3283.datasourcestarter.config.jdbc.converter.ListToMapConverter;
+import edu.northwestu.intc3283.datasourcestarter.dto.EntryForm;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
 import org.springframework.data.relational.core.mapping.Table;
-import org.springframework.validation.annotation.Validated;
 import java.time.Instant;
+import java.time.LocalDateTime;
+import java.util.Date;
+import java.util.Map;
 
 @Table("entries")
-@Validated
 public class Entry {
 
     @Id
     private Long id;
 
-    @Size(min = 5, max=50)
-    @NotEmpty
     private String name;
 
-    @Email
-    @NotEmpty
     private String email;
 
     @Column("favorite_color")
-    @NotEmpty
-    @Size(min = 3, max = 20)
     private String favoriteColor;
 
     @CreatedDate
     private Instant createdAt;
+
+    private boolean checkbox;
+
+    @Column("single_select")
+    private String singleSelect;
+
+    @Column("selected_items")
+    private Map<Long, String> selectedItems;
+
+    @Column("date")
+    private Date date;
+
+    @Column("datetime")
+    private LocalDateTime datetime;
+
+    public Entry() {
+    }
+
+    public Entry(EntryForm form) {
+        this.name = form.getName();
+        this.email = form.getEmail();
+        this.favoriteColor = form.getFavoriteColor();
+        this.checkbox = form.isCheckbox();
+        this.singleSelect = form.getSingleSelect();
+        this.selectedItems = ListToMapConverter.convertListToMap(form.getSelectedItems());
+        this.date = form.getDate();
+        this.datetime = form.getDatetime();
+    }
 
     public Long getId() {
         return id;
@@ -71,5 +93,45 @@ public class Entry {
 
     public void setFavoriteColor(String favoriteColor) {
         this.favoriteColor = favoriteColor;
+    }
+
+    public boolean isCheckbox() {
+        return checkbox;
+    }
+
+    public void setCheckbox(boolean checkbox) {
+        this.checkbox = checkbox;
+    }
+
+    public String getSingleSelect() {
+        return singleSelect;
+    }
+
+    public void setSingleSelect(String singleSelect) {
+        this.singleSelect = singleSelect;
+    }
+
+    public Map<Long, String> getSelectedItems() {
+        return selectedItems;
+    }
+
+    public void setSelectedItems(Map<Long, String> selectedItems) {
+        this.selectedItems = selectedItems;
+    }
+
+    public Date getDate() {
+        return date;
+    }
+
+    public void setDate(Date date) {
+        this.date = date;
+    }
+
+    public LocalDateTime getDatetime() {
+        return datetime;
+    }
+
+    public void setDatetime(LocalDateTime datetime) {
+        this.datetime = datetime;
     }
 }
