@@ -17,6 +17,27 @@
         </div>
     </div>
 
+
+    <div class="row">
+        <table class="table table-dark">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="entry : ${entries}">
+                <!-- Add more fields later -->
+                <td th:text="${entry.getId()}">ID</td>
+                <td th:text="${entry.getName()}">Name</td>
+            </tr>
+            </tbody>
+        </table>
+
+
+    </div>
+
 </div>
 
 

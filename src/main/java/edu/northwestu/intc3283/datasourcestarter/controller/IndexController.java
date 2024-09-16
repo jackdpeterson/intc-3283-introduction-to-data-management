@@ -21,7 +21,9 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String indexAction() {
+    public String indexAction(Model model) {
+        // Help our html pages access repo data
+        model.addAttribute("entries", this.entryRepository.findAll());
         return "index";
     }
 
