@@ -1,6 +1,11 @@
 package edu.northwestu.intc3283.datasourcestarter.entity;
 
 import com.fasterxml.jackson.annotation.JsonAnyGetter;
+import jakarta.validation.constraints.PositiveOrZero;
+import jakarta.validation.constraints.Max;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotEmpty;
+import jakarta.validation.constraints.Size;
 import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
