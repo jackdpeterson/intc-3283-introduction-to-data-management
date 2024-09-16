@@ -24,6 +24,9 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Age</th>
+                <th>Address</th>
+                <th>Human</th>
             </tr>
             </thead>
             <tbody>
@@ -31,6 +34,9 @@
                 <!-- Add more fields later -->
                 <td th:text="${entry.getId()}">ID</td>
                 <td th:text="${entry.getName()}">Name</td>
+                <td th:text="${entry.getAge()}">Age</td>
+                <td th:text="${entry.getAddress()}">Address</td>
+                <td th:text="${entry.getHuman()}">Human</td>
             </tr>
             </tbody>
         </table>

@@ -63,7 +63,7 @@
 
                 <div class="form-group">
                     <label for="human">Human</label>
-                    <input type="checkbox" checked="checked" class="form-control" id="human" th:field="*{human}">
+                    <input type="checkbox" checked="checked" class="form-check-input" id="human" th:field="*{human}">
                     <ul class="list-group-flush alert-warning">
                         <li class="list-group-item" th:each="err : ${#fields.errors('human')}"
                             th:text="${err}"></li>
