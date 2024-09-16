@@ -1,0 +1,1 @@
+ALTER TABLE `entries` MODIFY column `human` TINYINT(1) NULL;
