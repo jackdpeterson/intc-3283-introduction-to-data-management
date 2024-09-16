@@ -1,0 +1,15 @@
+spring:
+  flyway:
+    enabled: false
+    url: jdbc:mysql:tc://
+  profiles:
+    default: test
+    active: test
+logging:
+  level:
+    all: debug
+    org.springframework: debug
+    com.github.dockerjava: WARN
+    org.springframework.jdbc.core: TRACE
+    org.testcontainers: INFO
+    root: WARN
