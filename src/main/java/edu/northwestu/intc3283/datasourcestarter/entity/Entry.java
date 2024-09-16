@@ -6,6 +6,7 @@ import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotEmpty;
 import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -31,14 +32,13 @@ public class Entry {
 
     @PositiveOrZero
     @Max(135)
-    @NotEmpty
+    @NotNull
     private Integer age;
 
     @Size(min = 5, max = 150)
-    @NotEmpty
+    //@NotBlank
     private String address;
 
-    @NotEmpty
     private Boolean human;
 
     @CreatedDate
