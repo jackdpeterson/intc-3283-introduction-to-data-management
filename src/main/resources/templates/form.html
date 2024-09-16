@@ -38,6 +38,33 @@
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" th:field="*{email}">
                     <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('age')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="age">Age</label>
+                    <input type="number" class="form-control" id="age" th:field="*{email}">
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('email')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="kjhkjh" th:field="*{email}">
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('email')}"
+                            th:text="${err}"></li>
+                    </ul>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="kjlk" th:field="*{email}">
+                    <ul class="list-group-flush alert-warning">
                         <li class="list-group-item" th:each="err : ${#fields.errors('email')}"
                             th:text="${err}"></li>
                     </ul>

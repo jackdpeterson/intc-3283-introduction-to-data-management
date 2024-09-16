@@ -24,6 +24,12 @@ public class Entry {
     @NotEmpty
     private String email;
 
+    private int age;
+
+    private String major;
+
+    private String year;
+
     @CreatedDate
     private Instant createdAt;
 
@@ -41,6 +47,29 @@ public class Entry {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    public String getMajor(){
+        return major;
+    }
+
+    public void setMajor(String major){
+        this.major = major;
+    }
+    public String getYear(){
+        return year;
+    }
+
+    public void setYear(String year){
+        this.year = year;
     }
 
     public Instant getCreatedAt() {
