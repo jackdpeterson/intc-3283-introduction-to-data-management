@@ -27,6 +27,11 @@ public class IndexController {
         return "index";
     }
 
+    @GetMapping("/entries/view")
+    public String tableAction(Model model) {
+        model.addAttribute("entries", this.entryRepository.findAll());
+        return "table";
+    }
     @GetMapping("/entries/new")
     public String indexAction(final @ModelAttribute("entry") Entry input,
                               final BindingResult bindingResult,
