@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
     <meta charset="UTF-8">
     <title>Entry</title>
@@ -22,9 +24,6 @@
                     <td th:text="${entry.id}">Id</td>
                     <td th:text="${entry.name}">Name</td>
                     <td th:text="${entry.email}">Email</td>
-                    <td th:text="${entry.age}">Email</td>
-                    <td th:text="${entry.major}">Email</td>
-                    <td th:text="${entry.year}">Email</td>
                 </tr>
             </tbody>
             </table>
