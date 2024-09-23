@@ -25,6 +25,7 @@ public class Entry {
 
 
 
+
     @Column("username")
     @NotEmpty
     @Size(min = 3, max = 20)
@@ -37,6 +38,13 @@ public class Entry {
     @Column("date_of_birth")
     @NotEmpty
     private String dateOfBirth;
+
+    private int age;
+
+    private String major;
+
+    private String year;
+  
 
     @CreatedDate
     private Instant createdAt;
@@ -55,6 +63,29 @@ public class Entry {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public int getAge(){
+        return age;
+    }
+
+    public void setAge(int age){
+        this.age = age;
+    }
+
+    public String getMajor(){
+        return major;
+    }
+
+    public void setMajor(String major){
+        this.major = major;
+    }
+    public String getYear(){
+        return year;
+    }
+
+    public void setYear(String year){
+        this.year = year;
     }
 
     public Instant getCreatedAt() {
