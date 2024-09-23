@@ -55,6 +55,7 @@ public class IndexController {
         }
 
         this.entryRepository.save(input);
+
         return "redirect:/entries/" + input.getId();
     }
 }

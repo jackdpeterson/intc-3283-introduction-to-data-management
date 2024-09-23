@@ -39,12 +39,14 @@ public class Entry {
     @NotEmpty
     private String dateOfBirth;
 
-    private int age;
+    //private int age;
 
-    private String major;
 
-    private String year;
+
+
   
+
+
 
     @CreatedDate
     private Instant createdAt;
@@ -57,6 +59,7 @@ public class Entry {
         this.id = id;
     }
 
+
     public String getName() {
         return name;
     }
@@ -65,28 +68,16 @@ public class Entry {
         this.name = name;
     }
 
-    public int getAge(){
-        return age;
-    }
+   // public int getAge(){
+     //   return age;
+    //}
 
-    public void setAge(int age){
-        this.age = age;
-    }
+    //public void setAge(int age){
+      //  this.age = age;
+    //}
 
-    public String getMajor(){
-        return major;
-    }
 
-    public void setMajor(String major){
-        this.major = major;
-    }
-    public String getYear(){
-        return year;
-    }
 
-    public void setYear(String year){
-        this.year = year;
-    }
 
     public Instant getCreatedAt() {
         return createdAt;

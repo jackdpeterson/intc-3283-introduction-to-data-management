@@ -22,6 +22,8 @@
             <tr>
                 <th>ID</th>
                 <th>Name</th>
+                <th>Username</th>th>
+                <th>dateOfBirth</th>th>
             </tr>
             </thead>
             <tbody>
@@ -29,6 +31,7 @@
                 <td th:text="${entry.getId()}">ID goes here</td>
                 <td th:text="${entry.getName()}">Name goes here</td>
                 <td th:text="${entry.getUsername}">Username goes here</td>
+                <td th:text="${entry.getDateOfBirth()}">Date of Birth goes here</td>
             </tr>
             </tbody>
         </table>

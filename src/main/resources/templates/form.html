@@ -61,28 +61,24 @@
                     <ul class="list-group-flush alert-warning">
                         <li class="list-group-item" th:each="err : ${#fields.errors('dateOfBirth')}"
                             th:text="${err}"></li>
+
                     </ul>
                 </div>
 
-                <div class="form-group">
+                <label class="form-group">
                     <label for="shareData">Share Data</label>
-                    <input type="checkbox" class="checkboxes" id="shareData" th:field="*{shareData}">
+                    <input type="checkbox" class="checkboxes" id="shareData" th:field="*{shareData}"> </label>
                     <ul class="list-group-flush alert-warning">
                         <li class="list-group-item" th:each="err : ${#fields.errors('shareData')}"
+                        th:text="${err}"></li>
+                        </ul>
 
 
 
 
 
-                <div class="form-group">
-                    <label for="email">Email</label>
-                    <input type="email" class="form-control" id="kjlk" th:field="*{email}">
-                    <ul class="list-group-flush alert-warning">
-                        <li class="list-group-item" th:each="err : ${#fields.errors('email')}"
 
-                            th:text="${err}"></li>
-                    </ul>
-                </div>
+
 
                 <input type="submit" value="Submit" class="btn btn-primary"/>
 
@@ -91,6 +87,7 @@
 
         </div>
     </div>
+
 
 </div>
 
