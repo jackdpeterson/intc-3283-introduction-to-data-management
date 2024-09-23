@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+
 <head>
     <meta charset="UTF-8">
     <title>INTC-3283 - Welcome</title>
@@ -43,6 +45,7 @@
                     </ul>
                 </div>
 
+ 
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" th:field="*{username}">
@@ -66,6 +69,17 @@
                     <input type="checkbox" class="checkboxes" id="shareData" th:field="*{shareData}">
                     <ul class="list-group-flush alert-warning">
                         <li class="list-group-item" th:each="err : ${#fields.errors('shareData')}"
+
+
+
+
+
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="kjlk" th:field="*{email}">
+                    <ul class="list-group-flush alert-warning">
+                        <li class="list-group-item" th:each="err : ${#fields.errors('email')}"
+
                             th:text="${err}"></li>
                     </ul>
                 </div>
