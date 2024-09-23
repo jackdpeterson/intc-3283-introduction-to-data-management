@@ -11,12 +11,16 @@
     <div class="row">
         <div class="col">
             <h1>Entry Details</h1>
-          <table class="table">
+          <table class="table" style="border-spacing: 20px">
             <thead>
                 <tr>
                     <th>Id</th>
                     <th>Name</th>
                     <th>Email</th>
+                    <th>Username</th>
+                    <th>Date of Birth</th>
+                    <th>Sharing Data</th>
+
                 </tr>
             </thead>
             <tbody>
@@ -24,6 +28,9 @@
                     <td th:text="${entry.id}">Id</td>
                     <td th:text="${entry.name}">Name</td>
                     <td th:text="${entry.email}">Email</td>
+                    <td th:text="${entry.username}">Username</td>
+                    <td th:text="${entry.dateOfBirth}">Date of Birth</td>
+                    <td th:text="${entry.shareData}">Sharing data</td>
                 </tr>
             </tbody>
             </table>
