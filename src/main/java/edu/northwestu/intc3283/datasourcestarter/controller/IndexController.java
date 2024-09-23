@@ -21,7 +21,8 @@ public class IndexController {
     }
 
     @GetMapping("/")
-    public String indexAction() {
+    public String indexAction(Model model) {
+        model.addAttribute("entries", this.entryRepository.findAll());
         return "index";
     }
 

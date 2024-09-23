@@ -1,8 +1,6 @@
 package edu.northwestu.intc3283.datasourcestarter.entity;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotEmpty;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Column;
@@ -25,10 +23,20 @@ public class Entry {
     @NotEmpty
     private String email;
 
-    @Column("favorite_color")
+
+
+    @Column("username")
     @NotEmpty
     @Size(min = 3, max = 20)
-    private String favoriteColor;
+    private String username;
+
+    @Column("share_data")
+    @NotNull
+    private boolean shareData;
+
+    @Column("date_of_birth")
+    @NotEmpty
+    private String dateOfBirth;
 
     @CreatedDate
     private Instant createdAt;
@@ -65,12 +73,28 @@ public class Entry {
         this.email = email;
     }
 
-    public String getFavoriteColor() {
-        return favoriteColor;
+    public @NotEmpty @Size(min = 3, max = 20) String getUsername() {
+        return username;
     }
 
-    public void setFavoriteColor(String favoriteColor) {
-        this.favoriteColor = favoriteColor;
+    public void setUsername(@NotEmpty @Size(min = 3, max = 20) String username) {
+        this.username = username;
+    }
+
+    public boolean isShareData() {
+        return shareData;
+    }
+
+    public void setShareData(@NotEmpty boolean shareData) {
+        this.shareData = shareData;
+    }
+
+    public @NotEmpty String getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(@NotEmpty String dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 }
 
