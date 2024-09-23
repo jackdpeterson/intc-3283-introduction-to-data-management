@@ -11,11 +11,6 @@
     <div class="row">
         <div class="col">
             <h1>Welcome to INTC-3283; Introduction to Data Management</h1>
-
-            <p>Are you ready to make your first database entry?</p>
-            <a th:href="@{/entries/new}" class="btn btn-primary">Create an Entry</a>
-            <a th:href="@{/entries}" class="btn btn-primary">View All Entries</a>
-
         </div>
     </div>
 
@@ -24,7 +19,18 @@
     <div class="row">
         <table class="table table-striped">
             <thead>
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+            </tr>
             </thead>
+            <tbody>
+            <tr th:each="entry : ${entries}">
+                <td th:text="${entry.getId()}">ID goes here</td>
+                <td th:text="${entry.getName()}">Name goes here</td>
+                <td th:text="${entry.getUsername}">Username goes here</td>
+            </tr>
+            </tbody>
         </table>
     </div>
 </div>
