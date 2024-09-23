@@ -36,7 +36,7 @@ public class Entry {
     private Integer age;
 
     @Size(min = 5, max = 150)
-    @NotEmpty
+    //@NotBlank
     private String address;
 
     private Boolean human;
@@ -78,7 +78,7 @@ public class Entry {
 
     public Integer getAge() { return age; }
 
-    public void setAge(Integer age) { this.age  = age; }
+    public void setAge(Integer age) { this.age = age; }
 
     public String getAddress() { return address; }
 

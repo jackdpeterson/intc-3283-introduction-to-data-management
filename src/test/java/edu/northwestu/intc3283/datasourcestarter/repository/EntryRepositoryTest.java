@@ -30,6 +30,9 @@ class EntryRepositoryTest {
         Entry e = new Entry();
         e.setEmail("test@example.com");
         e.setName("Test user");
+        e.setAge(8);
+        e.setAddress("Test 45600 Ne 67th Street 98074");
+        e.setHuman(Boolean.TRUE);
         this.entryRepository.save(e);
         assertNotNull(e.getId());
     }
@@ -40,12 +43,18 @@ class EntryRepositoryTest {
         Entry e = new Entry();
         e.setName("Test user");
         e.setEmail("test1@example.com");
+        e.setAge(8);
+        e.setAddress("Test 45600 Ne 67th Street 98074");
+        e.setHuman(Boolean.TRUE);
         this.entryRepository.save(e);
 
         this.entryRepository.findById(e.getId()).ifPresent(entry -> {
             assertNotNull(entry.getId());
             assertNotNull(entry.getName());
             assertNotNull(entry.getEmail());
+            assertNotNull(entry.getAge());
+            assertNotNull(entry.getAddress());
+            assertNotNull(entry.getHuman());
         });
     }
 
@@ -54,11 +63,17 @@ class EntryRepositoryTest {
         Entry e = new Entry();
         e.setName("Test user");
         e.setEmail("test1@example.com");
+        e.setAge(8);
+        e.setAddress("Test 45600 Ne 67th Street 98074");
+        e.setHuman(Boolean.TRUE);
         this.entryRepository.save(e);
 
         Entry e2 = new Entry();
         e2.setName("Test user 2");
         e2.setEmail("test1@example.com");
+        e.setAge(8);
+        e.setAddress("Test 45600 Ne 67th Street 98074");
+        e.setHuman(Boolean.TRUE);
 
         assertThrows(DbActionExecutionException.class, () -> {
             this.entryRepository.save(e2);
