@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>INTC-3283 - Welcome</title>
+    <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
+    <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.js}"></script>
+</head>
+<body>
+<div class="container-fluid">
+    <div class="row">
+        <div class="col">
+            <h1>Donate</h1>
+            <!-- Search Existing Donor -->
+            <div class="mb-4">
+                <form th:action="@{/donors/search}" method="get" class="d-flex">
+                    <input class="form-control me-2" type="search" name="searchTerm" placeholder="Search for a donor by name" aria-label="Search">
+                    <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
+
+            <!-- If donor is found, show their information -->
+            <div th:if="${foundDonor}">
+                <h4>Donor Found</h4>
+                <p th:text="${foundDonor.firstName + ' ' + foundDonor.lastName}"></p>
+                <!-- Add more donor details here -->
+            </div>
+
+            <!-- Add or Edit Donor Form -->
+            <form th:action="@{/donors/save}" th:object="${donorForm}" method="post">
+                <div class="mb-3">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" th:field="*{firstName}" placeholder="Enter first name" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">First name is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" th:field="*{lastName}" placeholder="Enter last name" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">Last name is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address1" class="form-label">Address 1</label>
+                    <input type="text" class="form-control" id="address1" th:field="*{address1}" placeholder="Enter address line 1" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('address1')}" th:errors="*{address1}">Address is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="address2" class="form-label">Address 2</label>
+                    <input type="text" class="form-control" id="address2" th:field="*{address2}" placeholder="Enter address line 2">
+                </div>
+
+                <div class="mb-3">
+                    <label for="city" class="form-label">City</label>
+                    <input type="text" class="form-control" id="city" th:field="*{city}" placeholder="Enter city" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('city')}" th:errors="*{city}">City is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="state" class="form-label">State</label>
+                    <input type="text" class="form-control" id="state" th:field="*{state}" placeholder="Enter state" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('state')}" th:errors="*{state}">State is required.</div>
+                </div>
+
+                <div class="mb-3">
+                    <label for="zip" class="form-label">ZIP Code</label>
+                    <input type="text" class="form-control" id="zip" th:field="*{zip}" placeholder="Enter ZIP code" required>
+                    <div class="invalid-feedback" th:if="${#fields.hasErrors('zip')}" th:errors="*{zip}">ZIP code is required.</div>
+                </div>
+
+                <button type="submit" class="btn btn-primary">Save Donor</button>
+            </form>
+        </div>
+    </div>
+
+</div>
+
+
+</body>
+</html>
