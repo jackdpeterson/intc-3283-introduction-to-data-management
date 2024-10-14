@@ -60,6 +60,12 @@ class DonationsRepositoryTest {
         donor.setEmail("test@example.com");
         donor.setFirstName("Generous");
         donor.setLastName("Donor");
+        donor.setAddress2("");
+        donor.setAddress1("");
+        donor.setCity("");
+        donor.setState("");
+        donor.setZipCode("");
+
         this.donorsRepository.save(donor);
 
         // Create and save a Donation
