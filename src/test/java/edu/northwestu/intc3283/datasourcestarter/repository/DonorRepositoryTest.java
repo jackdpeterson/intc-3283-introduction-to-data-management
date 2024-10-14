@@ -3,7 +3,6 @@ package edu.northwestu.intc3283.datasourcestarter.repository;
 import edu.northwestu.intc3283.datasourcestarter.config.DatabaseTestContextConfiguration;
 import edu.northwestu.intc3283.datasourcestarter.config.jdbc.CustomJdbcConfiguration;
 import edu.northwestu.intc3283.datasourcestarter.entity.Donor;
-import edu.northwestu.intc3283.datasourcestarter.entity.Donor;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,15 +23,20 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 class DonorRepositoryTest {
 
     @Autowired
-    private DonorsRepository entryRepository;
+    private DonorsRepository donorsRepository;
 
     @Test
     public void canSave() {
         Donor e = new Donor();
         e.setEmail("test@example.com");
+        e.setAddress1("");
+        e.setAddress2("");
+        e.setCity("");
+        e.setState("");
+        e.setZipCode("");
         e.setFirstName("Generous");
         e.setLastName("Donor");
-        this.entryRepository.save(e);
+        this.donorsRepository.save(e);
         assertNotNull(e.getId());
     }
 
@@ -43,9 +47,14 @@ class DonorRepositoryTest {
         e.setEmail("test@example.com");
         e.setFirstName("Generous");
         e.setLastName("Donor");
-        this.entryRepository.save(e);
+        e.setAddress1("");
+        e.setAddress2("");
+        e.setCity("");
+        e.setState("");
+        e.setZipCode("");
+        this.donorsRepository.save(e);
 
-        this.entryRepository.findById(e.getId()).ifPresent(entry -> {
+        this.donorsRepository.findById(e.getId()).ifPresent(entry -> {
             assertNotNull(entry.getId());
             assertNotNull(entry.getFirstName());
             assertNotNull(entry.getEmail());
@@ -58,15 +67,25 @@ class DonorRepositoryTest {
         e.setEmail("test@example.com");
         e.setFirstName("Generous");
         e.setLastName("Donor");
-        this.entryRepository.save(e);
+        e.setAddress1("");
+        e.setAddress2("");
+        e.setCity("");
+        e.setState("");
+        e.setZipCode("");
+        this.donorsRepository.save(e);
 
         Donor e2 = new Donor();
         e.setEmail("test@example.com");
         e.setFirstName("Generous 2");
         e.setLastName("Donor");
+        e.setAddress1("");
+        e.setAddress2("");
+        e.setCity("");
+        e.setState("");
+        e.setZipCode("");
 
         assertThrows(DbActionExecutionException.class, () -> {
-            this.entryRepository.save(e2);
+            this.donorsRepository.save(e2);
         });
 
     }

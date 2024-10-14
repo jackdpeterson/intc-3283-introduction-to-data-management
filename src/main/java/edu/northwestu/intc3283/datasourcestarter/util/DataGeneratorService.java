@@ -5,6 +5,7 @@ import edu.northwestu.intc3283.datasourcestarter.entity.Donation;
 import edu.northwestu.intc3283.datasourcestarter.entity.Donor;
 import edu.northwestu.intc3283.datasourcestarter.repository.DonationsRepository;
 import edu.northwestu.intc3283.datasourcestarter.repository.DonorsRepository;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.Instant;
@@ -13,6 +14,7 @@ import java.time.YearMonth;
 import java.time.ZoneId;
 import java.util.Random;
 import java.util.stream.IntStream;
+import static java.lang.Math.abs;
 
 @Service
 public class DataGeneratorService {
@@ -35,20 +37,20 @@ public class DataGeneratorService {
             donor.setLastName(faker.name().lastName());
             donor.setEmail(faker.internet().emailAddress());
             donor.setAddress1(faker.address().streetAddress());
+            donor.setAddress2(faker.address().secondaryAddress());
             donor.setCity(faker.address().city());
             donor.setState(faker.address().stateAbbr());
-            donor.setZip(faker.address().zipCode());
+            donor.setZipCode(faker.address().zipCode());
             donorsRepository.save(donor);
 
             // Generate a random number of donations for this donor
             int numDonations = random.nextInt(maxDonationsPerDonor) + 1;
             IntStream.range(0, numDonations).forEach(j -> {
                 Donation donation = new Donation();
-                donation.setDonorId(donor.getId());
-                donation.setCurrencyCode("USD");
-                donation.setCurrencyAmount(generateRandomAmount());
-                donation.setDesignation(faker.lorem().sentence(3));
-                donation.setCommittedAt(generateRandomDate());
+                donation.setDonor(AggregateReference.to(donor.getId()));
+                donation.setAmount(generateRandomAmount());
+                String quote = faker.yoda().quote();
+                donation.setCreatedAt(generateRandomDate());
                 donationsRepository.save(donation);
             });
         });
@@ -82,8 +84,7 @@ public class DataGeneratorService {
     }
 
     // Utility method for generating a random donation amount
-    private Double generateRandomAmount() {
-        double amount = 10 + (1000 - 10) * random.nextDouble();  // Generates random amount between 10 and 1000
-        return amount;
+    private Integer generateRandomAmount() {
+        return random.nextInt(10,1000);
     }
 }

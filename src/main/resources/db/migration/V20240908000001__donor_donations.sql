@@ -1,26 +1,24 @@
 CREATE TABLE donors
 (
-    donor_id   BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    email      VARCHAR(255) NULL,
-    first_name VARCHAR(255) NOT NULL,
-    last_name  VARCHAR(255) NOT NULL,
-    phone      VARCHAR(15)  NULL,
-    address1   VARCHAR(255) NULL,
-    address2   VARCHAR(255) NULL,
-    city       VARCHAR(100) NULL,
-    state      VARCHAR(50)  NULL,
-    zip        VARCHAR(20)  NULL
+    `id`         INT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `first_name` CHAR(16)     NOT NULL DEFAULT 'Generous',
+    `last_name`  CHAR(21)     NOT NULL DEFAULT 'Donor',
+    `email`      CHAR(254)    NULL,
+    `phone`      VARCHAR(15)  NULL,
+    `address1`   VARCHAR(47)  NOT NULL DEFAULT '',
+    `address2`   VARCHAR(47)  NOT NULL DEFAULT '',
+    `city`       VARCHAR(28)  NOT NULL DEFAULT '',
+    `state`      CHAR(2)      NOT NULL DEFAULT '',
+    `country`    CHAR(3)      NOT NULL DEFAULT '',
+    `zip_code`   CHAR(10)     NOT NULL DEFAULT '',
+    `created_at` TIMESTAMP    NOT NULL DEFAULT CURRENT_TIMESTAMP
 );
 
 CREATE TABLE donations
 (
-    donation_id     BIGINT UNSIGNED AUTO_INCREMENT PRIMARY KEY,
-    donor_id        BIGINT UNSIGNED NOT NULL,
-    currency_code   CHAR(3)         NOT NULL,
-    currency_amount DECIMAL(10, 2)  NOT NULL,
-    designation     VARCHAR(255),
-    committed_at    TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    received_at     TIMESTAMP       NULL,
-    FOREIGN KEY (donor_id) REFERENCES donors (donor_id) ON DELETE CASCADE
+    `id`         BIGINT UNSIGNED NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    `donor_id`   INT UNSIGNED    NOT NULL,
+    `amount`     INT UNSIGNED    NOT NULL,
+    `created_at` TIMESTAMP       NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (`donor_id`) REFERENCES donors (`id`)
 );

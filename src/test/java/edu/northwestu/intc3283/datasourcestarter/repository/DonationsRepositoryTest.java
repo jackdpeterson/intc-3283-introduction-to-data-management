@@ -10,13 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.data.jdbc.DataJdbcTest;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
 import org.springframework.context.annotation.Import;
+import org.springframework.data.jdbc.core.mapping.AggregateReference;
 import org.springframework.data.relational.core.conversion.DbActionExecutionException;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-
-import java.math.BigDecimal;
-import java.time.Instant;
-
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
@@ -40,18 +37,20 @@ class DonationsRepositoryTest {
         donor.setEmail("test@example.com");
         donor.setFirstName("Generous");
         donor.setLastName("Donor");
+        donor.setAddress1("");
+        donor.setAddress2("");
+        donor.setCity("");
+        donor.setZipCode("");
+        donor.setState("");
         this.donorsRepository.save(donor);
         
         // Now create a Donation linked to the donor
         Donation donation = new Donation();
-        donation.setDonorId(donor.getId());
-        donation.setCurrencyCode("USD");
-        donation.setCurrencyAmount(100.00);
-        donation.setDesignation("Charity Fund");
-        donation.setCommittedAt(Instant.now());
+        donation.setDonor(AggregateReference.to(donor.getId()));
+        donation.setAmount(100);
 
         this.donationsRepository.save(donation);
-        assertNotNull(donation.getDonationId());
+        assertNotNull(donation.getId());
     }
 
     @Test
@@ -65,19 +64,16 @@ class DonationsRepositoryTest {
 
         // Create and save a Donation
         Donation donation = new Donation();
-        donation.setDonorId(donor.getId());
-        donation.setCurrencyCode("USD");
-        donation.setCurrencyAmount(100.00);
-        donation.setDesignation("Charity Fund");
-        donation.setCommittedAt(Instant.now());
+        donation.setDonor(AggregateReference.to(donor.getId()));
+
+        donation.setAmount(100);
 
         this.donationsRepository.save(donation);
 
         // Fetch and validate the saved Donation
-        this.donationsRepository.findById(donation.getDonationId()).ifPresent(d -> {
-            assertNotNull(d.getDonationId());
-            assertNotNull(d.getCurrencyCode());
-            assertNotNull(d.getCurrencyAmount());
+        this.donationsRepository.findById(donation.getId()).ifPresent(d -> {
+            assertNotNull(d.getId());
+            assertNotNull(d.getAmount());
         });
     }
 
@@ -85,11 +81,8 @@ class DonationsRepositoryTest {
     public void throwsIfDonorDoesNotExist() {
         // Create a Donation with a non-existing donor ID
         Donation donation = new Donation();
-        donation.setDonorId(999999L);  // Invalid donor ID
-        donation.setCurrencyCode("USD");
-        donation.setCurrencyAmount(100.00);
-        donation.setDesignation("Charity Fund");
-        donation.setCommittedAt(Instant.now());
+        donation.setDonor(AggregateReference.to(999999L));  // Invalid donor ID
+        donation.setAmount(100);
 
         assertThrows(DbActionExecutionException.class, () -> {
             this.donationsRepository.save(donation);

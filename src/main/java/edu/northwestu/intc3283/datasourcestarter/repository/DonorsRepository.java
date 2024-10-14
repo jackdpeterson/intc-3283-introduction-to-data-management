@@ -18,7 +18,7 @@ public interface DonorsRepository extends CrudRepository<Donor, Long> {
                   d.first_name AS firstName,
                   d.last_name AS lastName,
                   d.email AS email,
-                  YEAR(dn.committed_at) AS year,\s
+                  YEAR(dn.committed_at) AS year,
                   MONTH(dn.committed_at) AS month,
                   SUM(dn.currency_amount) AS totalDonationAmount
               FROM

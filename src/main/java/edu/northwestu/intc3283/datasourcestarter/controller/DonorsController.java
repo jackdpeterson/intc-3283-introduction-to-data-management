@@ -7,14 +7,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 @Controller
-@RequestMapping("/donors")
+@RequestMapping("/")
 public class DonorsController {
 
     private final DonorsRepository donorRepository;
@@ -38,7 +37,7 @@ public class DonorsController {
     }
 
 
-    @GetMapping
+    @GetMapping("")
     public String getAll(@RequestParam(value = "searchTerm", required = false) String searchTerm, Model model) {
         List<Donor> donors;
 
@@ -61,9 +60,9 @@ public class DonorsController {
         return "donors/report";
     }
 
-    @GetMapping("/random")
+    @GetMapping("/donors/random")
     public String generateRandomDonors(@RequestParam("numDonors") int numDonors, @RequestParam("maxDonationsPerDonor") int maxDonationsPerDonor) {
         this.dataGeneratorService.generateRandomDonorsAndDonations(numDonors, maxDonationsPerDonor);
-        return "redirect:/donors";
+        return "redirect:/";
     }
 }
