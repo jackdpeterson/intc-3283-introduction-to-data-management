@@ -2,25 +2,14 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>INTC-3283 - Welcome</title>
+    <title>INTC-3283 - Table</title>
     <link type="text/css" rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.css}">
     <script type="text/javascript" th:src="@{/webjars/bootstrap/js/bootstrap.bundle.js}"></script>
 </head>
 <body>
 <div class="container-fluid">
-    <div class="row">
-        <div class="col">
-            <h1>Welcome to INTC-3283; Introduction to Data Management</h1>
 
-            <p>Are you ready to make your first database entry?</p>
-            <a th:href="@{/entries/new}" class="btn btn-primary">Create an Entry</a>
-            <p></p>
-            <a th:href="@{/entries/view}" class="btn btn-primary">View Entries</a>
-        </div>
-    </div>
-
-
-    <!--
+    <!---Concept from PreProject 1 How-to video--->
     <div class="row">
         <table class="table table-dark">
             <thead>
@@ -35,7 +24,7 @@
             </thead>
             <tbody>
             <tr th:each="entry : ${entries}">
-                !-- Add more fields later --
+                <!-- Add more fields later -->
                 <td th:text="${entry.getId()}">ID</td>
                 <td th:text="${entry.getName()}">Name</td>
                 <td th:text="${entry.getAge()}">Age</td>
@@ -48,7 +37,10 @@
 
 
     </div>
-    -->
+
+    <a th:href="@{/}" class="btn btn-primary">Back</a>
+
+
 
 </div>
 
