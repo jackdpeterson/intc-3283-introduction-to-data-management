@@ -3,6 +3,7 @@ package edu.northwestu.intc3283.datasourcestarter.controller;
 import edu.northwestu.intc3283.datasourcestarter.entity.Donor;
 import edu.northwestu.intc3283.datasourcestarter.repository.DonorsRepository;
 import edu.northwestu.intc3283.datasourcestarter.util.DataGeneratorService;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -10,6 +11,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -55,9 +60,18 @@ public class DonorsController {
     }
 
     @GetMapping("/report")
-    public String topDonorsReport(Model model) {
-        model.addAttribute("topDonors", donorRepository.findTopDonors(5));
+    public String topDonorsReport(Model model, @Param("limit") Integer limit) {
+        if (null == limit || limit < 1) {
+            limit = 5;
+        }
+        model.addAttribute("topDonors", donorRepository.findTopDonors(limit));
         return "donors/report";
+    }
+
+    @GetMapping("/reports/janice")
+    public String janiceReport(Model model) {
+
+        return "";
     }
 
     @GetMapping("/donors/random")

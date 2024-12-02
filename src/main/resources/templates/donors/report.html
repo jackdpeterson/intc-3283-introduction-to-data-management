@@ -24,13 +24,13 @@
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:each="donation : ${topDonors}">
-                    <td th:text="${donation.firstName}"></td>
-                    <td th:text="${donation.lastName}"></td>
-                    <td th:text="${donation.email}"></td>
-                    <td th:text="${donation.year}"></td>
+                <tr th:each="row : ${topDonors}">
+                    <td th:text="${row.firstName}"></td>
+                    <td th:text="${row.lastName}"></td>
+                    <td th:text="${row.email}"></td>
+                    <td th:text="${row.year}"></td>
                     <td>
-                <span th:switch="${donation.month}">
+                <span th:switch="${row.month}">
                     <span th:case="1">January</span>
                     <span th:case="2">February</span>
                     <span th:case="3">March</span>
@@ -46,7 +46,7 @@
                     <span th:case="*">Unknown</span>
                 </span>
                     </td>
-                    <td th:text="${donation.totalDonationAmount}"></td>
+                    <td th:text="${row.totalDonationAmount}"></td>
                 </tr>
                 </tbody>
             </table>

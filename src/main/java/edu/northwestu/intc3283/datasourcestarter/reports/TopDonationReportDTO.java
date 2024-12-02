@@ -1,20 +1,14 @@
 package edu.northwestu.intc3283.datasourcestarter.reports;
 
-import org.springframework.data.relational.core.mapping.Column;
 import java.math.BigDecimal;
 
 public class TopDonationReportDTO {
 
-    @Column("firstName")
     private String firstName;
-
-    @Column("lastName")
     private String lastName;
     private String email;
     private int year;
     private int month;
-
-    @Column("totalDonationAmount")
     private BigDecimal totalDonationAmount;
 
     public String getFirstName() {
