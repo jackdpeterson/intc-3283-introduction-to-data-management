@@ -1,5 +1,8 @@
 package edu.northwestu.intc3283.datasourcestarter.tasks.entity;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Size;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.relational.core.mapping.Table;
@@ -9,13 +12,19 @@ import java.time.Instant;
 public class Task {
 
     @Id
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Long id;
 
+    @Size(min = 5)
     private String title;
+
     private String description;
+
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String status;
 
     @CreatedDate
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private Instant createdAt;
 
     public Long getId() {

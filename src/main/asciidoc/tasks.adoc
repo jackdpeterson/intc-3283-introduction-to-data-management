@@ -1,3 +1,7 @@
+=== Create a Task (200 OK)
+include::{snippets}/tasks/create-200/curl-request.adoc[]
+include::{snippets}/tasks/create-200/http-response.adoc[]
+
 === GET One Task (200 OK)
 include::{snippets}/tasks/get-one-200/curl-request.adoc[]
 include::{snippets}/tasks/get-one-200/http-response.adoc[]
@@ -5,3 +9,11 @@ include::{snippets}/tasks/get-one-200/http-response.adoc[]
 === Get One Task (404 not found)
 include::{snippets}/tasks/get-one-404/curl-request.adoc[]
 include::{snippets}/tasks/get-one-404/http-response.adoc[]
+
+=== Get a list of tasks (200 OK)
+include::{snippets}/tasks/get-all-200/curl-request.adoc[]
+include::{snippets}/tasks/get-all-200/http-response.adoc[]
+
+=== Delete a Task (204 No Content)
+include::{snippets}/tasks/delete-one-204/curl-request.adoc[]
+include::{snippets}/tasks/delete-one-204/http-response.adoc[]
