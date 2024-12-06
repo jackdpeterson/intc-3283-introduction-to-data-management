@@ -9,6 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.restdocs.AutoConfigureRestDocs;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
 import org.springframework.restdocs.RestDocumentationExtension;
 import org.springframework.restdocs.mockmvc.RestDocumentationRequestBuilders;
 import org.springframework.test.context.bean.override.mockito.MockitoBean;
@@ -16,10 +18,13 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
+import org.springframework.data.domain.Pageable;
 import java.time.Instant;
+import java.util.List;
 import java.util.Optional;
 import static org.mockito.ArgumentMatchers.any;
-import static org.mockito.Mockito.when;
+import static org.mockito.ArgumentMatchers.anyInt;
+import static org.mockito.Mockito.*;
 import static org.springframework.restdocs.mockmvc.MockMvcRestDocumentation.document;
 import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 
@@ -28,15 +33,13 @@ import static org.springframework.restdocs.operation.preprocess.Preprocessors.*;
 @AutoConfigureMockMvc
 @ExtendWith({RestDocumentationExtension.class, SpringExtension.class})
 @AutoConfigureRestDocs(outputDir = "target/generated-snippets")
-class TasksApicontrollerTest {
+class TasksApiControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
 
-
     @MockitoBean
     private TasksRepository taskRepository;
-
 
     @Test
     public void getTaskProvides200OkWithaValidId() throws Exception {
@@ -55,8 +58,31 @@ class TasksApicontrollerTest {
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())
         ));
-
     }
+
+    @Test
+    public void getTasksProvides200Ok() throws Exception {
+        Task mockedTaskResponse = new Task();
+        mockedTaskResponse.setId(1L);
+        mockedTaskResponse.setTitle("title");
+        mockedTaskResponse.setDescription("description");
+        mockedTaskResponse.setStatus("PENDING");
+        mockedTaskResponse.setCreatedAt(Instant.now());
+
+        // fix the types here.
+        Page<Task> expectedPageResponse = new PageImpl<>(List.of(mockedTaskResponse));
+        when(this.taskRepository.findAll(any(Pageable.class))).thenReturn(expectedPageResponse);
+
+        ResultActions resultActions = mockMvc.perform(RestDocumentationRequestBuilders.get("/tasks?page=0&size=1")
+                        .accept("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        resultActions.andDo(document("tasks/get-collection-200",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())
+        ));
+    }
+
 
     @Test
     public void createANewTask200Ok() throws Exception {
@@ -128,6 +154,22 @@ class TasksApicontrollerTest {
                 preprocessRequest(prettyPrint()),
                 preprocessResponse(prettyPrint())
         ));
+    }
+
+    @Test
+    public void deleteTask() throws Exception {
+        when(this.taskRepository.existsById(any())).thenReturn(true);
+
+        ResultActions resultActions = mockMvc.perform(RestDocumentationRequestBuilders.delete("/tasks/1")
+                        .accept("application/json"))
+                .andExpect(MockMvcResultMatchers.status().isNoContent());
+        resultActions.andDo(document("tasks/delete-task-204",
+                preprocessRequest(prettyPrint()),
+                preprocessResponse(prettyPrint())
+        ));
+
+        // verify that this was called exactly 1 time
+        verify(this.taskRepository, times(1)).deleteById(1L);
 
     }
 

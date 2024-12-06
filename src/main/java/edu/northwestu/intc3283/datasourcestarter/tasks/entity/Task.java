@@ -1,5 +1,6 @@
 package edu.northwestu.intc3283.datasourcestarter.tasks.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.Size;
@@ -12,7 +13,7 @@ import java.time.Instant;
 public class Task {
 
     @Id
-    @JsonInclude(JsonInclude.Include.NON_NULL)
+    @JsonIgnore
     private Long id;
 
     @Size(min = 5)
